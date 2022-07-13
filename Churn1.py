@@ -25,40 +25,40 @@ def welcome():
 
 
 # Pre-processing user input
-def prediction(AGE, CUS_Month_Income, CUS_Gender, CUS_Marital_Status, YEARS_WITH_US, total_debit_amount,
+def prediction(aGE, cUS_Month_Income, cUS_Gender, cUS_Marital_Status, yEARS_WITH_US, total_debit_amount,
                    total_credit_amount,
-                   total_transactions, CUS_Target, TAR_Desc):
+                   total_transactions, cUS_Target, tAR_Desc):
     
-    if CUS_Gender == "MALE":
-        CUS_Gender = 1
+    if cUS_Gender == "MALE":
+        cUS_Gender = 1
     else:
-        CUS_Gender = 0
+        cUS_Gender = 0
 
-    if CUS_Marital_Status == "MARRIED":
-        CUS_Marital_Status = 0
-    elif CUS_Marital_Status == "SINGLE":
-        CUS_Marital_Status = 1
-    elif CUS_Marital_Status == "WIDOWED":
-        CUS_Marital_Status = 2
-    elif CUS_Marital_Status == "DIVORCE":
-        CUS_Marital_Status = 3
-    elif CUS_Marital_Status == "OTHER":
-        CUS_Marital_Status = 4
+    if cUS_Marital_Status == "MARRIED":
+        cUS_Marital_Status = 0
+    elif cUS_Marital_Status == "SINGLE":
+        cUS_Marital_Status = 1
+    elif cUS_Marital_Status == "WIDOWED":
+        cUS_Marital_Status = 2
+    elif cUS_Marital_Status == "DIVORCE":
+        cUS_Marital_Status = 3
+    elif cUS_Marital_Status == "OTHER":
+        cUS_Marital_Status = 4
     else:
-        CUS_Marital_Status = 5
+        cUS_Marital_Status = 5
 
-    if TAR_Desc == "EXECUTIVE":
-        TAR_Desc = 0
-    elif TAR_Desc == "LOW":
-        TAR_Desc = 1
-    elif TAR_Desc == "MIDDLE":
-        TAR_Desc = 2
+    if tAR_Desc == "EXECUTIVE":
+        tAR_Desc = 0
+    elif tAR_Desc == "LOW":
+        tAR_Desc = 1
+    elif tAR_Desc == "MIDDLE":
+        tAR_Desc = 2
     else:
-        TAR_Desc = 3
+        tAR_Desc = 3
 
     prediction = classifier.predict(
-        [[AGE, CUS_Month_Income,CUS_Gender, CUS_Marital_Status, YEARS_WITH_US, total_debit_amount, total_credit_amount,
-          total_transactions, CUS_Target, TAR_Desc]])
+        [[aGE, cUS_Month_Income,cUS_Gender, cUS_Marital_Status, yEARS_WITH_US, total_debit_amount, total_credit_amount,
+          total_transactions, cUS_Target, tAR_Desc]])
     print(prediction)
     return prediction
 
@@ -80,16 +80,16 @@ def main():
     # the following lines create text boxes in which the user can enter
     # the data required to make the prediction
 
-    AGE = st.number_input("Age",  min_value=14, max_value=150)
-    CUS_Marital_Status = st.selectbox("Marital Status", ('MARRIED', 'SINGLE', 'WIDOWED', 'DIVORCE', 'OTHER', 'PARTNER'))
-    CUS_Gender= st.selectbox("Gender", ('FEMALE', 'MALE'))
-    CUS_Month_Income = st.number_input("Monthly income",min_value=0.0)
-    YEARS_WITH_US = st.number_input("Years with us", min_value=0)
+    aGE = st.number_input("Age",  min_value=14, max_value=150)
+    cUS_Marital_Status = st.selectbox("Marital Status", ('MARRIED', 'SINGLE', 'WIDOWED', 'DIVORCE', 'OTHER', 'PARTNER'))
+    cUS_Gender= st.selectbox("Gender", ('FEMALE', 'MALE'))
+    cUS_Month_Income = st.number_input("Monthly income",min_value=0.0)
+    yEARS_WITH_US = st.number_input("Years with us", min_value=0)
     total_debit_amount = st.number_input("total debit amount",min_value=0.0)
     total_credit_amount = st.number_input("total credit amount", min_value=0.0)
     total_transactions = st.number_input("Total Transcations", min_value=0)
-    TAR_Desc = st.selectbox("TAR Descrption", ('EXECUTIVE', 'LOW', 'MIDDLE', 'PLATINUM'))
-    CUS_Target = st.selectbox("CUS Target", ([2231, 2223, 2222, 2235, 2212, 2232, 2230, 2211, 2234, 2224, 2233,
+    tAR_Desc = st.selectbox("TAR Descrption", ('EXECUTIVE', 'LOW', 'MIDDLE', 'PLATINUM'))
+    cUS_Target = st.selectbox("CUS Target", ([2231, 2223, 2222, 2235, 2212, 2232, 2230, 2211, 2234, 2224, 2233,
        2236]))
     result = ""
 
@@ -98,8 +98,8 @@ def main():
     # the prediction function defined above is called to make the prediction
     # and store it in the variable result
     if st.button("Predict"):
-        result = prediction(AGE, CUS_Month_Income,CUS_Gender, CUS_Marital_Status, YEARS_WITH_US, total_debit_amount,
-                            total_credit_amount, total_transactions,CUS_Target, TAR_Desc)
+        result = prediction(aGE, cUS_Month_Income,cUS_Gender, cUS_Marital_Status, yEARS_WITH_US, total_debit_amount,
+                            total_credit_amount, total_transactions,cUS_Target, tAR_Desc)
       
         if result==0: #0 is active and 1 churn
             result='ACTIVE'
